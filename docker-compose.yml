@@ -1,0 +1,12 @@
+services:
+  # Servicio Angular (desarrollo)
+  angular:
+    build: ./Angular
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./Angular:/app
+      - /app/node_modules   # evita sobrescribir node_modules del contenedor
+    stdin_open: true
+    tty: true
+    command: sh -c "npm install && npm run start"

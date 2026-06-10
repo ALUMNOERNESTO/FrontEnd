@@ -1,9 +1,10 @@
+
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "analytics": "52b62fe6-8b3e-4408-82db-3a702e979567"
+    "analytics": "6c667f3c-104c-4ea7-b1bc-39f5c93a108e"
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -27,15 +28,7 @@
             ],
             "styles": [
               "src/styles.css"
-            ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "security": {
-              "allowedHosts": []
-            },
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            ]
           },
           "configurations": {
             "production": {
@@ -63,6 +56,11 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "buildTarget": "Angular:build",
+            "host": "0.0.0.0",
+            "allowedHosts": ["localhost", "127.0.0.1"]
+          },
           "configurations": {
             "production": {
               "buildTarget": "Angular:build:production"
@@ -70,11 +68,7 @@
             "development": {
               "buildTarget": "Angular:build:development"
             }
-          },
-          "defaultConfiguration": "development"
-        },
-        "test": {
-          "builder": "@angular/build:unit-test"
+          }
         }
       }
     }
