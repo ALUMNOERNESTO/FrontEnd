@@ -1,21 +1,19 @@
-# Imagen base de Node.js (versión LTS)
-FROM node:24-alpine
+FROM node:22-alpine
 
-# Establecer el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copiar los archivos de configuración de dependencias
+# Copiar archivos de dependencias
 COPY package*.json ./
 
-# Instalar Angular CLI globalmente y dependencias locales
-RUN npm install -g @angular/cli
+# Instalar dependencias del proyecto (incluye @angular/cli y @angular/build)
 RUN npm install
+RUN npm install --save-dev @angular/build --legacy-peer-deps 
 
 # Copiar el resto del código fuente
 COPY . .
 
-# Exponer el puerto de desarrollo de Angular (por defecto 4200)
+# Exponer puerto de desarrollo
 EXPOSE 4200
 
-# Comando para ejecutar Angular en modo desarrollo, escuchando en todas las interfaces
-CMD ["ng", "serve", "--host", "0.0.0.0", "--poll=2000"]
+# Usar el Angular CLI local (dentro de node_modules) para el serve
+CMD ["npx", "ng", "serve", "--host", "0.0.0.0", "--poll=2000"]
